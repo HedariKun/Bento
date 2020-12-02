@@ -1,0 +1,9 @@
+{
+  "name": "bento",
+  "version": "0.0.1",
+  "description": "a client to browser booru based websites.",
+  "main": "dist/app.js",
+  "repository": "https://github.com/hedarikun/bento",
+  "author": "HedariKun",
+  "license": "MIT"
+}
