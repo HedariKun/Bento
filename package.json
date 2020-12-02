@@ -1,9 +1,17 @@
 {
-  "name": "bento",
-  "version": "0.0.1",
-  "description": "a client to browser booru based websites.",
-  "main": "dist/app.js",
-  "repository": "https://github.com/hedarikun/bento",
-  "author": "HedariKun",
-  "license": "MIT"
+ "name": "bento",
+ "version": "0.0.1",
+ "description": "a client to browser booru based websites.",
+ "scripts": {
+  "start": "tsc && IS_DEV=true electron ."
+ },
+ "main": "dist/app.js",
+ "repository": "https://github.com/hedarikun/bento",
+ "author": "HedariKun",
+ "license": "MIT",
+ "dependencies": {
+  "@types/electron": "^1.6.10",
+  "@types/node": "^14.14.10",
+  "electron": "^11.0.3"
+ }
 }
