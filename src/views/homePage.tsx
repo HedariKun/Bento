@@ -1,4 +1,5 @@
 import * as React from "react"
+import ImageCard from "./components/imageCard"
 
 export default function HomePage() {
 	return(
@@ -8,7 +9,16 @@ export default function HomePage() {
 					<input id="search-bar" placeholder="Search for tags..."/>
 				</div>
 			</div>
-			<div id="images-container"></div>
+			<div id="images-container">
+				{ ImageCard("") }
+				{ ImageCard("") }
+				{ ImageCard("") }
+				{ ImageCard("") }
+				{ ImageCard("") }
+				{ ImageCard("") }
+				{ ImageCard("") }
+				{ ImageCard("") }
+			</div>
 		</div>
 	)
 }

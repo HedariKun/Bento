@@ -22,3 +22,18 @@
 		}
 	}
 }
+
+// ToDO: Add Support for masonry Layout
+#images-container {
+	padding: 20px 50px;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-gap:10px;
+	grid-template-rows: masonry;
+	.image-card {
+		background-color: red;
+		width: auto;
+		height: auto;
+	}
+
+}
