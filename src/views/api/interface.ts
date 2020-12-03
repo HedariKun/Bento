@@ -1,12 +1,12 @@
 
 export interface IAPI {
-	getImages(rating: string, page?: number, limit?: number) : ImageData
+	getImages(tags: string, rating: string, page?: number, limit?: number) : Promise<IImageData[]>
 }
 
-export interface ImageData {
+export interface IImageData {
 	id: number
 	tags: string[]
-	createAt: Date
+	createdAt: Date
 	updatedAt: Date
 	fileSize: number
 	source: string
