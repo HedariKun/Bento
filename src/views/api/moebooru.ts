@@ -11,7 +11,9 @@ export default class MoeBooru implements IAPI {
 	async getImages(tags: string, rating: string, page?: number, limit?: number): Promise<IImageData[]> {
 
 		let tagValue = tags.split(",").map(x=> x.replace(" ", "_")).join("+")
-		tagValue += `+rating:${rating}` 
+		tagValue += `&rating:${rating}` 
+		tagValue += `&limit:${limit}`
+		tagValue += `&page=${page}`
 		const res = await fetch(this.url + `/post.json?tags=${tagValue}`)
 
 		const data = await res.json()

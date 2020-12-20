@@ -4,29 +4,32 @@ import ImageCard from "./components/imageCard"
 
 
 export default class HomePage extends React.Component<any, any>{
-
+	api = new MoeBooru("https://yande.re")
+	isUpdating = false
 	constructor() {
 		super({})
 		this.state = {
 			cards: [
-				ImageCard('')
 			]
 		}
 		
+		window.addEventListener("scroll",  async () => {
+			if(window.innerHeight + window.scrollY >= document.body.offsetHeight-150 && !this.isUpdating) {
+				this.isUpdating = true
+				await this.addImages()
+				this.isUpdating = false
+			}
+		})
 	}
 
 	async componentDidMount() {
-		try {
-		const api = new MoeBooru("https://yande.re")
-		const images = await api.getImages("loli", "s", 0, 100)
+		this.addImages()
+	}
+
+	async addImages() {
+		const images = await this.api.getImages("loli", "q", this.api.page, 20)
 		this.setState({ cards: this.state.cards.concat(images.map(x => ImageCard(x.previewUrl)))})
-		console.log("happens")
-		console.log(api)
-		console.log(images)
-		} catch(error) {
-			console.log("hello")
-			console.log(error) 
-		}
+		this.api.page++
 	}
 
 	render() {
