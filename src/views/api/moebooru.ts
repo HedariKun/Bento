@@ -12,7 +12,6 @@ export default class MoeBooru implements IAPI {
 
 		let tagValue = tags.split(",").map(x=> x.replace(" ", "_")).join("+")
 		tagValue += `+rating:${rating}` 
-
 		const res = await fetch(this.url + `/post.json?tags=${tagValue}`)
 
 		const data = await res.json()

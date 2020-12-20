@@ -8,7 +8,6 @@ function createWindow() {
 			nodeIntegration: true
 		}
 	})
-	win.setMenu(null)
 	if(process.env.IS_DEV == "true") {
 		win.loadURL("http://localhost:1234")
 	} else {

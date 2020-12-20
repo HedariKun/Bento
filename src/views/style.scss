@@ -26,14 +26,16 @@
 // ToDO: Add Support for masonry Layout
 #images-container {
 	padding: 20px 50px;
-	display: grid;
 	grid-template-columns: repeat(5, 1fr);
 	grid-gap:10px;
 	grid-template-rows: masonry;
+	text-align: center;
 	.image-card {
+		display: inline-block;
+		margin: 0 10px 10 0;
 		background-color: red;
-		width: auto;
-		height: auto;
+		width: 220px;
+		height: 300px;
 	}
 
 }
