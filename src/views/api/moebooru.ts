@@ -2,7 +2,7 @@ import {IAPI, IImageData } from "./interface"
 
 export default class MoeBooru implements IAPI { 
 	url: string = ""
-	page: number = 0
+	page: number = 1
 
 	constructor(url: string) {
 		this.url = url
@@ -10,8 +10,9 @@ export default class MoeBooru implements IAPI {
 
 	async getImages(tags: string, rating: string, page?: number, limit?: number): Promise<IImageData[]> {
 
-		let tagValue = tags.split(",").map(x=> x.replace(" ", "_")).join("+")
-		tagValue += `&rating:${rating}` 
+		let tagValue = tags.split(",").map(x=> x.replace(/ (.*)/, "$1").replace(" ", "_")).join("+")
+		console.log(rating)
+		tagValue += `+rating:${rating}` 
 		tagValue += `&limit:${limit}`
 		tagValue += `&page=${page}`
 		const res = await fetch(this.url + `/post.json?tags=${tagValue}`)

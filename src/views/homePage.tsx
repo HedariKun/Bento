@@ -1,3 +1,4 @@
+import {argv0} from "process"
 import * as React from "react"
 import MoeBooru from "./api/moebooru"
 import ImageCard from "./components/imageCard"
@@ -6,6 +7,9 @@ import ImageCard from "./components/imageCard"
 export default class HomePage extends React.Component<any, any>{
 	api = new MoeBooru("https://yande.re")
 	isUpdating = false
+	tags = ""
+	filter = "s"
+
 	constructor() {
 		super({})
 		this.state = {
@@ -20,6 +24,9 @@ export default class HomePage extends React.Component<any, any>{
 				this.isUpdating = false
 			}
 		})
+
+		this.search = this.search.bind(this)
+		this.changeOption = this.changeOption.bind(this)
 	}
 
 	async componentDidMount() {
@@ -27,9 +34,23 @@ export default class HomePage extends React.Component<any, any>{
 	}
 
 	async addImages() {
-		const images = await this.api.getImages("loli", "q", this.api.page, 20)
+		const images = await this.api.getImages(this.tags, this.filter, this.api.page, 20)
 		this.setState({ cards: this.state.cards.concat(images.map(x => ImageCard(x.previewUrl)))})
 		this.api.page++
+	}
+	
+	async search(val : React.ChangeEvent<HTMLInputElement>) {
+		this.tags = val.target.value
+		this.setState({cards: []})
+		this.api.page = 1
+		this.addImages()
+	}
+
+	async changeOption(val : React.ChangeEvent<HTMLSelectElement>) {
+		this.filter = val.target.value
+		this.setState({cards: []})
+		this.api.page = 1
+		this.addImages()
 	}
 
 	render() {
@@ -37,11 +58,18 @@ export default class HomePage extends React.Component<any, any>{
 		<div>
 			<div id="top-bar">
 				<div id="search"> 
-					<input id="search-bar" placeholder="Search for tags..."/>
+					<input id="search-bar" onChange={this.search} placeholder="Search for tags..."/>
 				</div>
+				<select onChange={this.changeOption}>
+					<option value="s"> safe </option>
+					<option value="q"> questionable </option>
+					<option value="e"> lewd </option>
+				</select>
 			</div>
 			<div id="images-container">
-				{ this.state.cards }
+				<ul className="image-list">
+					{ this.state.cards }
+				</ul>
 			</div>
 		</div>
 	)
