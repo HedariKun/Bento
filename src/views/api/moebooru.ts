@@ -31,7 +31,7 @@ export default class MoeBooru implements IAPI {
 					height: image.height,
 					source: image.source,
 					fileSize: image.file_size,
-					imageUrl: image.image_url,
+					imageUrl: image.file_url,
 					previewUrl: image.preview_url,
 					previewWidth: image.preview_width,
 					previewHeight: image.preview_height
